@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+---
+# local
+spring:
+  profiles: local
+  security:
+    user:
+      name: bactoria
+      password: pass
+  datasource:
+    url: jdbc:postgresql://localhost:5432/celeb-youtube
+    username: bactoria
+    password: pass
+  jpa:
+    show-sql: true
+
+#      spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
