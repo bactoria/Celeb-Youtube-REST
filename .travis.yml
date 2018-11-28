@@ -21,7 +21,7 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: celeb-youtube # S3 버킷
+    bucket: bactoria-youtube-s3 # S3 버킷
     region: ap-northeast-2 # 아시아 태평양 (서울)
     skip_cleanup: true
     acl: public_read
