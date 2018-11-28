@@ -14,5 +14,5 @@ public class CelebYoutubeApplication {
 
     public static final String APPLICATION_LOCATIONS = "spring.config.location="
             + "classpath:application.yml,"
-            + "/home/ec2-user/youtube/backend/config/real-application.yml";
+            + "/home/ec2-user/backend/config/real-application.yml";
 }
