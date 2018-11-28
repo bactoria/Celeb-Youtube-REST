@@ -30,4 +30,17 @@ deploy:
     on:
       repo: bactoria/Celeb-Youtube-REST #Github 주소
       branch: master
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_ID # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_PWD # Travis repo settings에 설정된 값
+    bucket: celeb-youtube # S3 버킷
+    key: youtube-server.zip # S3 버킷에 저장된 myBlog.zip 파일을 EC2로 배포
+    bundle_type: zip
+    application: youtube-service # CodeDeploy 어플리케이션 이름
+    deployment_group: youtube-service-group # CodeDeploy 배포 그룹
+    region: ap-northeast-2 # 아시아 태평양(서울)
+    wait-until-deployed: true
+    on:
+      repo: bactoria/Celeb-Youtube-REST #Github 주소
+      branch: master
  
