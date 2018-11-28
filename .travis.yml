@@ -32,7 +32,7 @@ deploy:
       branch: master
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_ID # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_PWD # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_ACCESS_PWD # Travis repo settings에 설정된 값
     bucket: celeb-youtube # S3 버킷
     key: youtube-server.zip # S3 버킷에 저장된 myBlog.zip 파일을 EC2로 배포
     bundle_type: zip
