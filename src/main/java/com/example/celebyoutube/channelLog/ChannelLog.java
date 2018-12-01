@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
 @Getter
 @Entity
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 public class ChannelLog {
 
     @EmbeddedId
-    private ChannelLogPk ChannelLogPk;
+    private ChannelLogPk channelLogPk;
 
     @Column
     private Long subscriber;
