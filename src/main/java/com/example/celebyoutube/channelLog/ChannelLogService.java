@@ -14,11 +14,13 @@ public class ChannelLogService {
     private final ChannelLogRepository channelLogRepository;
 
     public List<ChannelLog> getChannelLog_Hour(String id) {
-        return channelLogRepository.findTop7ByChannelLogPk_Id(id);
+        final long LOG_COUNT = 7;
+        return channelLogRepository.findHourUnit(id, LOG_COUNT);
     }
 
     public List<ChannelLog> getChannelLog_Day(String id) {
         final Long HOUR = 0L;
-        return channelLogRepository.findTop7ByChannelLogPk_IdAndChannelLogPk_Hour(id, HOUR);
+        final long LOG_COUNT = 7;
+        return channelLogRepository.findDayUnit(id, HOUR, LOG_COUNT);
     }
 }
