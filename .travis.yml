@@ -5,6 +5,9 @@ jdk:
 before_install:
   - chmod +x mvnw
 
+after_success:
+    - mvn jacoco:report coveralls:report
+
 branches:
   only:
     - master
