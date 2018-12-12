@@ -53,17 +53,7 @@ public class ChannelService {
 
         updateChannel(dto.getId());
 
-        ChannelSaveResponseDto channelSaveResponseDto = ChannelSaveResponseDto.builder()
-                .id(responseChannel.getId())
-                .name(responseChannel.getName())
-                .introVideoUrl(responseChannel.getIntroVideoUrl())
-                .title(responseChannel.getTitle())
-                .content(responseChannel.getContent())
-                .image(responseChannel.getImage())
-                .subscriber(responseChannel.getSubscriber())
-                .joinDate(responseChannel.getJoinDate())
-                .views(responseChannel.getViews())
-                .build();
+        ChannelSaveResponseDto channelSaveResponseDto = new ChannelSaveResponseDto(responseChannel);
 
         return channelSaveResponseDto;
     }
