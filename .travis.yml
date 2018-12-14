@@ -9,4 +9,10 @@ branches:
   only:
     - travis-test
 
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+  
 script: "./mvnw clean package"
+
