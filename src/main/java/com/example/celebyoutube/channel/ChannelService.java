@@ -5,9 +5,6 @@ import com.example.celebyoutube.channel.dto.ChannelSaveRequestDto;
 import com.example.celebyoutube.channel.dto.ChannelSaveResponseDto;
 import com.example.celebyoutube.exceptions.ChannelNotFoundException;
 import lombok.AllArgsConstructor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -26,20 +23,14 @@ public class ChannelService {
 
     public void updateChannel(String id) throws IOException {
         //TODO :: 채널 크롤링
-        String connUrl = "https://www.youtube.com/channel/" + id + "/about";
-        Document doc = Jsoup.connect(connUrl).get();
+        String title = "TITLE";
+        String content = "CONTENT";
+        String image = "IMAGE";
 
-        Elements elements = doc.select("meta[property]");
-        String title = elements.select("meta[property=og:title]").attr("content");
-        String content = elements.select("meta[property=og:description]").attr("content");
-        String image = elements.select("meta[property=og:image]").attr("content");
+        Long subscriber = 0L;
 
-        Long subscriber = Long.valueOf(doc.select("span.subscribed").text().replace(",", ""));
-
-        List<String> elementList = doc.select("span.about-stat").eachText();
-        Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
-        String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
-        LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
+        Long views = 1L;
+        LocalDate joinDate = LocalDate.now();
 
         LocalDateTime updatedTime = LocalDateTime.now();
 
