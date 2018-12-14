@@ -27,29 +27,27 @@ public class ChannelService {
     public void updateChannel(String id) throws IOException {
         //TODO :: 채널 크롤링
         String connUrl = "https://www.youtube.com/channel/" + id + "/about";
-        System.out.println("1");
         Document doc = Jsoup.connect(connUrl).get();
 
-        System.out.println("2");
         Elements elements = doc.select("meta[property]");
         String title = elements.select("meta[property=og:title]").attr("content");
-        System.out.println("3");
+        System.out.println(title);
         String content = elements.select("meta[property=og:description]").attr("content");
-        System.out.println("4");
+        System.out.println(content);
         String image = elements.select("meta[property=og:image]").attr("content");
+        System.out.println(image);
 
-        System.out.println("5");
         Long subscriber = Long.valueOf(doc.select("span.subscribed").text().replace(",", ""));
-        System.out.println("6");
+        System.out.println(subscriber);
 
         List<String> elementList = doc.select("span.about-stat").eachText();
-        System.out.println("7");
         Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
-        System.out.println("8");
+        System.out.println(views);
         String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
-        System.out.println("9");
+        System.out.println(joinDateArray);
         LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
-        System.out.println("10");
+
+        System.out.println("=================");
 
         LocalDateTime updatedTime = LocalDateTime.now();
 
