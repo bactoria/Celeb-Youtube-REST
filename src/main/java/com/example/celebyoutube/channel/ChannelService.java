@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,12 +40,35 @@ public class ChannelService {
 
         List<String> elementList = doc.select("span.about-stat").eachText();
         Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
-        String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
-        LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
+        LocalDate joinDate = toLocalDate(elementList.get(2));
 
         LocalDateTime updatedTime = LocalDateTime.now();
 
         this.channelRepository.updateChannel(id, title, content, image, subscriber, joinDate, views, updatedTime);
+    }
+
+    private LocalDate toLocalDate(String s) {
+        final String ENG = "Joined";
+        final String KR = "가입일:";
+
+        LocalDate result = null;
+
+        String searchCase = s.split(" ")[0];
+
+        switch (searchCase) {
+            case ENG:
+                String date = s.substring(7);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH);
+                result = LocalDate.parse(date, formatter);
+                break;
+
+            case KR:
+                date = s.substring(5);
+                formatter = DateTimeFormatter.ofPattern("yyyy. MM. d.", Locale.ENGLISH);
+                result = LocalDate.parse(date, formatter);
+                break;
+        }
+        return result;
     }
 
     public ChannelSaveResponseDto saveChannel(ChannelSaveRequestDto dto) throws IOException {
