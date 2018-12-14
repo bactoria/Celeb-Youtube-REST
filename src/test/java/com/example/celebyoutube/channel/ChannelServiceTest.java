@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +30,34 @@ public class ChannelServiceTest {
     public void Mocking이_되었다() {
         assertThat(channelRepositoryMock).isNotNull();
         assertThat(channelService).isNotNull();
+    }
+
+    @Test
+    public void 한국어로_크롤링된_JoinedDate의_타입을_LocalDate형으로_변환한다() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        String date = "Joined Dec 13, 2018";
+        LocalDate localDate = LocalDate.of(2018, 12, 13);
+
+        //call private Method ( using reflection.)
+        Method method = channelService.getClass().getDeclaredMethod("toLocalDate", String.class);
+        method.setAccessible(true);
+        LocalDate result = (LocalDate) method.invoke(channelService, date);
+
+        assertThat(result).isEqualTo(localDate);
+    }
+
+    @Test
+    public void 영어로_크롤링된_JoinedDate의_타입을_LocalDate형으로_변환한다() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        String date = "가입일: 2018. 12. 13.";
+        LocalDate localDate = LocalDate.of(2018, 12, 13);
+
+        //call private Method ( using reflection.)
+        Method method = channelService.getClass().getDeclaredMethod("toLocalDate", String.class);
+        method.setAccessible(true);
+        LocalDate result = (LocalDate) method.invoke(channelService, date);
+
+        assertThat(result).isEqualTo(localDate);
     }
 
     @Test
