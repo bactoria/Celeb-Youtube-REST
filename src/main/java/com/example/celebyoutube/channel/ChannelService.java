@@ -45,6 +45,7 @@ public class ChannelService {
         Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
         System.out.println(views);
         String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
+        System.out.println(elementList.get(2));
         System.out.println(Arrays.toString(joinDateArray));
         LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
 
