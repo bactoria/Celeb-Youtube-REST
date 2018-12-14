@@ -26,23 +26,30 @@ public class ChannelService {
 
     public void updateChannel(String id) throws IOException {
         //TODO :: 채널 크롤링
-        System.out.println(1);
         String connUrl = "https://www.youtube.com/channel/" + id + "/about";
-        System.out.println(2);
+        System.out.println("1");
         Document doc = Jsoup.connect(connUrl).get();
-        System.out.println(3);
 
+        System.out.println("2");
         Elements elements = doc.select("meta[property]");
-        System.out.println(4);
         String title = elements.select("meta[property=og:title]").attr("content");
-        System.out.println(5);
-        String content = "백엔드 테스트용 채널입니다.";
-        String image = "https://yt3.ggpht.com/a-/AN66SAx-2HMivOo50k0DBE7PmMGPLKxG3H4CLuXOCA=s900-mo-c-c0xffffffff-rj-k-no";
+        System.out.println("3");
+        String content = elements.select("meta[property=og:description]").attr("content");
+        System.out.println("4");
+        String image = elements.select("meta[property=og:image]").attr("content");
 
-        Long subscriber = 0L;
+        System.out.println("5");
+        Long subscriber = Long.valueOf(doc.select("span.subscribed").text().replace(",", ""));
+        System.out.println("6");
 
-        Long views = 1L;
-        LocalDate joinDate = LocalDate.of(2018, 12, 13);
+        List<String> elementList = doc.select("span.about-stat").eachText();
+        System.out.println("7");
+        Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
+        System.out.println("8");
+        String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
+        System.out.println("9");
+        LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
+        System.out.println("10");
 
         LocalDateTime updatedTime = LocalDateTime.now();
 
