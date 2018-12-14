@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -44,7 +45,7 @@ public class ChannelService {
         Long views = Long.valueOf(elementList.get(1).replaceAll("[^0-9]", ""));
         System.out.println(views);
         String[] joinDateArray = elementList.get(2).replaceAll("[^0-9.]", "").split("\\.");
-        System.out.println(joinDateArray);
+        System.out.println(Arrays.toString(joinDateArray));
         LocalDate joinDate = LocalDate.of(Integer.valueOf(joinDateArray[0]), Integer.valueOf(joinDateArray[1]), Integer.valueOf(joinDateArray[2]));
 
         System.out.println("=================");
