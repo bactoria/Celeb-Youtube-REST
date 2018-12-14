@@ -130,9 +130,11 @@ public class ChannelRestControllerTest {
     public void 인증한_사용자가_특정_채널_추가시_정상적으로_추가() throws Exception {
         //given
         final String ID = "ID";
-        ChannelSaveRequestDto channelSaveRequestDto = ChannelSaveRequestDto.builder().id(ID).build();
-        Channel channel = channelSaveRequestDto.toEntity();
-        ChannelSaveResponseDto channelSaveResponseDto = new ChannelSaveResponseDto(channel);
+        final String NAME = "NAME";
+        final String INTRO_VIDEO_URL = "INTRO_VIDEO_URL";
+        ChannelSaveRequestDto channelSaveRequestDto = ChannelSaveRequestDto.builder().id(ID).name(NAME).introVideoUrl(INTRO_VIDEO_URL).build();
+
+        ChannelSaveResponseDto channelSaveResponseDto = new ChannelSaveResponseDto(channelSaveRequestDto.toEntity());
 
         given(channelServiceMock.saveChannel(any(ChannelSaveRequestDto.class))).willReturn(channelSaveResponseDto);
 
