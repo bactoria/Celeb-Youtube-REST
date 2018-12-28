@@ -65,9 +65,9 @@ public class ChannelServiceTest {
         //given
         final String ID = "UCCljTtZh6Rt1uxFH_NRkIEw";
 
-        final String TITLE = "유튜튜 테스트";
+        final String TITLE = "테스트유튜튜";
         final String CONTENT = "백엔드 테스트용 채널입니다.";
-        final String IMAGE = "https://yt3.ggpht.com/a-/AN66SAx-2HMivOo50k0DBE7PmMGPLKxG3H4CLuXOCA=s900-mo-c-c0xffffffff-rj-k-no";
+        final String IMAGE = "https://yt3.ggpht.com/a-/AAuE7mDiqJn0nb4wJs3FhHIKo6zW549jcGzapzmzkg=s900-mo-c-c0xffffffff-rj-k-no";
         final LocalDate JOIN_DATE = LocalDate.of(2018, 12, 13);
 
         //when
