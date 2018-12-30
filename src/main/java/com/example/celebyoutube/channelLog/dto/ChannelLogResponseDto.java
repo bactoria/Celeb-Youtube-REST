@@ -1,9 +1,15 @@
 package com.example.celebyoutube.channelLog.dto;
 
 import com.example.celebyoutube.channelLog.ChannelLog;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
+@Getter
+@ToString
+@NoArgsConstructor
 public class ChannelLogResponseDto {
 
     private String id;
